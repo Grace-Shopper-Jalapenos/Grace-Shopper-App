@@ -13,6 +13,9 @@ const syncAndSeed = async () => {
 
         await db.sync({ force: true });
 
+        // Keep testing database empty
+        if (db.config.database !== "postgres://localhost/graceshopper") return;
+
         // Generate Fake Users (not admins!)
         let fakeUsers = [];
         const NUMBER_OF_USERS = 10;

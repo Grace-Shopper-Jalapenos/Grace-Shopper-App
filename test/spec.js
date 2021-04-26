@@ -2,10 +2,13 @@ const { expect } = require("chai");
 
 // Database Imports
 const {
+    db,
     model: { Products, Artists, Categories, Users, Orders, Reviews },
 } = require("../server/db");
 
 const app = require("supertest")(require("../server/server"));
+
+console.log(db.config);
 
 describe("Routes", () => {
     describe("GET /", () => {
@@ -48,7 +51,7 @@ describe("Routes", () => {
             it("serves up all Products", async () => {
                 const response = await app.get("/api/products").expect(200);
                 expect(response.body).to.have.length(2);
-                expect(response.body[0].name).to.equal(storedCampuses[0].name);
+                expect(response.body[0].name).to.equal(storedProducts[0].name);
             });
         });
     });

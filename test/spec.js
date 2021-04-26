@@ -3,12 +3,11 @@ const { expect } = require("chai");
 // Database Imports
 const {
     model: { Products, Artists, Categories, Users, Orders, Reviews },
-} = require("./db");
+} = require("../server/db");
 
 const app = require("supertest")(require("../server/server"));
 
 describe("Routes", () => {
-    // beforeEach(async () => await syncAndSeed());
     describe("GET /", () => {
         it("show info", async () => {
             const response = await app.get("/");

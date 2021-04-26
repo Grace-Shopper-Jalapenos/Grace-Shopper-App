@@ -1,6 +1,9 @@
 const { expect } = require("chai");
 
-const { syncAndSeed } = require("../server/db/seed");
+// Database Imports
+const {
+    model: { Products, Artists, Categories, Users, Orders, Reviews },
+} = require("./db");
 
 const app = require("supertest")(require("../server/server"));
 
@@ -14,10 +17,40 @@ describe("Routes", () => {
         });
     });
 
-    describe("GET /api/products", () => {
-        it("return products", async () => {
-            const response = await app.get("/api/products");
-            expect(response.status).to.equal(200);
+    describe("Product Routes", () => {
+        let storedProducts;
+        const productData = [
+            {
+                name: "Mona Lisa",
+                description: "test data",
+                price: "1000",
+                year: "2021",
+                stock: "10",
+                imgUrl: "#",
+            },
+            {
+                name: "Italian Artwork 2",
+                description: "test data 2",
+                price: "2000",
+                year: "1900",
+                stock: "1",
+                imgUrl: "#",
+            },
+        ];
+
+        beforeEach(async () => {
+            const createdProducts = await Products.bulkCreate(productData);
+            storedProducts = createdProducts.map(
+                (product) => product.dataValues,
+            );
+        });
+
+        describe("GET `/api/products`", () => {
+            it("serves up all Products", async () => {
+                const response = await app.get("/api/products").expect(200);
+                expect(response.body).to.have.length(2);
+                expect(response.body[0].name).to.equal(storedCampuses[0].name);
+            });
         });
     });
 });

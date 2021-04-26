@@ -15,9 +15,6 @@ const {
     model: { Products, Artists, Categories, Users, Orders, Reviews },
 } = require("./db");
 
-// Seeds Database
-syncAndSeed();
-
 // Serve Static Folder
 app.use(express.static(path.join(__dirname, "../public")));
 
@@ -32,6 +29,7 @@ app.use("/api/products", productsAPI);
 app.use("/api/orders", ordersAPI);
 app.use("/api/reviews", reviewsAPI);
 
+// Serve App
 app.get("/", async (req, res, next) => {
     try {
         res.sendFile(path.join(__dirname, "../public/index.html"));

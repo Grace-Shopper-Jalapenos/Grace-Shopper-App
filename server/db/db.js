@@ -11,7 +11,7 @@ if (process.env.SSL) {
 }
 
 const db = new Sequelize(
-    process.env.DATABASE_URL || "postgres://localhost:5432/graceShopper",
+    process.env.DATABASE_URL || "postgres://localhost/graceShopper",
     config,
 );
 

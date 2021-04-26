@@ -15,6 +15,9 @@ const {
     model: { Products, Artists, Categories, Users, Orders, Reviews },
 } = require("./db");
 
+// Seeds Database
+syncAndSeed();
+
 // Serve Static Folder
 app.use(express.static(path.join(__dirname, "../public")));
 

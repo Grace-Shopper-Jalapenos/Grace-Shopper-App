@@ -18,12 +18,15 @@ class TakeMoney extends React.Component {
   //   };
 
   async handleToken(token, addresses) {
-    const response = await axios.post("/checkout", { token });
+    const response = await axios.post(`/api/checkout`, { token });
     const { status } = response.data;
+    console.log("status", status);
     if (status === "success") {
-      toast("Success! Check email for details", { type: "success" });
+      //toast("Success! Check email for details", { type: "success" });
+      throw "Success! Check email for details";
     } else {
-      toast("Something went wrong", { type: "error" });
+      //toast("Something went wrong", { type: "error" });
+      throw "Something went wrong";
     }
   }
 
